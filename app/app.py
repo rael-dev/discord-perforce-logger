@@ -225,11 +225,11 @@ class PerforceLogger():
                 vote = participants_data.get(user, {}).get("vote", {}).get("value")
 
             if vote == 1:
-                status = f"<a:green_flame:1412124425557512344>"
+                status = SWARM_UP_VOTE_EMOJI
             elif vote == -1:
-                status = f"<a:red_flame:1412173185746473071>"
+                status = SWARM_DOWN_VOTE_EMOJI
             else:
-                status = f"<a:white_flame:1412173755425226883>"
+                status = SWARM_NO_VOTE_EMOJI
             lines.append(f"{status} `{user}`")
 
         return "\n".join(lines) if len(lines) > 1 else "No participants yet."
@@ -319,8 +319,8 @@ class PerforceLogger():
                         embed = DiscordEmbed(
                             title=f"Review #{reviewId}: `{state}`",
                             description=(
-                                f"`{author}` requested a review in `{project}`!\n"
-                                f"Please see [Review #{reviewId}]({link}).\n\n"
+                                f"`{author}` requested a review in `{project}`!\n\n"
+                                f"Vote on the review here [Review #{reviewId}]({link}).\n"
                                 f"```md\n{desc}\n```\n"
                                 f"{participants_text}"
                             ),
@@ -342,8 +342,8 @@ class PerforceLogger():
                         embed = DiscordEmbed(
                             title=f"Review #{reviewId}: `{state}`",
                             description=(
-                                f"`{author}` requested a review in `{project}`!\n"
-                                f"Please see [Review #{reviewId}]({link}).\n\n"
+                                f"`{author}` requested a review in `{project}`!\n\n"
+                                f"Vote on the review here [Review #{reviewId}]({link}).\n"
                                 f"```md\n{desc}\n```\n"
                                 f"{participants_text}"
                             ),
@@ -380,6 +380,9 @@ if __name__ == "__main__":
     SWARM_URL = config['Swarm'].get('url', fallback=None)
     SWARM_USER = config['Swarm'].get('user', fallback=None)
     SWARM_TICKET = config['Swarm'].get('ticket', fallback=None)
+    SWARM_UP_VOTE_EMOJI = config['Swarm'].get('up-vote-emoji', fallback='[ UP ]')
+    SWARM_DOWN_VOTE_EMOJI = config['Swarm'].get('down-vote-emoji', fallback='[DOWN]')
+    SWARM_NO_VOTE_EMOJI = config['Swarm'].get('no-vote-emoji', fallback='[NONE]')
 
     logger = PerforceLogger(
         SUBMISSIONS_WEBHOOK_URL,
