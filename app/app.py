@@ -357,7 +357,7 @@ class PerforceLogger():
                     review_messages[reviewId] = {
                         "message_id": message_id,
                         "last_state": state,
-                        "participants_snapshot": participants_text
+                        "last_participants_text": participants_text
                     }
                     save_review_messages()
                     time.sleep(1)
