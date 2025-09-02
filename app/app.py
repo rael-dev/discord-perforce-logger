@@ -275,16 +275,18 @@ class PerforceLogger():
                 if isinstance(projects_field, dict) and projects_field:
                     project_list = []
                     for project_name, inner in projects_field.items():
-                        if isinstance(inner, dict):
-                            depots = list(inner.values())
-                        elif isinstance(inner, list):
-                            depots = inner
-                        else:
-                            depots = []
-                        if depots:
-                            project_list.append(f"{project_name} ({', '.join(depots)})")
-                        else:
-                            project_list.append(project_name)
+                        # Can add the depot names here
+                        # if isinstance(inner, dict):
+                        #     depots = list(inner.values())
+                        # elif isinstance(inner, list):
+                        #     depots = inner
+                        # else:
+                        #     depots = []
+                        # if depots:
+                        #     project_list.append(f"{project_name} ({', '.join(depots)})")
+                        # else:
+                        #     project_list.append(project_name)
+                        project_list.append(project_name)
                     project = ", ".join(project_list)
                 else:
                     project = "unknown-project"
@@ -319,8 +321,8 @@ class PerforceLogger():
                         embed = DiscordEmbed(
                             title=f"Review #{reviewId}: `{state}`",
                             description=(
-                                f"`{author}` requested a review in `{project}`!\n\n"
-                                f"Vote on the review here [Review #{reviewId}]({link}).\n"
+                                f"`{author}` requested a review for `{project}`!\n\n"
+                                f"Participants can vote on the review [here]({link}).\n"
                                 f"```md\n{desc}\n```\n"
                                 f"{participants_text}"
                             ),
@@ -342,8 +344,8 @@ class PerforceLogger():
                         embed = DiscordEmbed(
                             title=f"Review #{reviewId}: `{state}`",
                             description=(
-                                f"`{author}` requested a review in `{project}`!\n\n"
-                                f"Vote on the review here [Review #{reviewId}]({link}).\n"
+                                f"`{author}` requested a review for `{project}`!\n\n"
+                                f"Participants can vote on the review [here]({link}).\n"
                                 f"```md\n{desc}\n```\n"
                                 f"{participants_text}"
                             ),
