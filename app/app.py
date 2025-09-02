@@ -307,8 +307,8 @@ class PerforceLogger():
                 else:
                     message_id = stored_info.get("message_id")
                     last_state = stored_info.get("last_state")
-                    last_participants = stored_info.get("participants_snapshot", [])
-                    if last_state != state or last_participants != participants_filtered:
+                    last_participants_text = stored_info.get("last_participants_text")
+                    if last_state != state or last_participants_text != participants_text:
                         need_update = True
                     
 
@@ -357,7 +357,7 @@ class PerforceLogger():
                     review_messages[reviewId] = {
                         "message_id": message_id,
                         "last_state": state,
-                        "participants_snapshot": participants_filtered
+                        "participants_snapshot": participants_text
                     }
                     save_review_messages()
                     time.sleep(1)
